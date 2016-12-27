@@ -80,6 +80,3 @@ gulp.task('default', () => {
     }
     runSequence.apply(null, seq);
 });
-
-// TODO(automatwon): Add init task that generates p5 TS definitions and then build, clean, etc.
-
