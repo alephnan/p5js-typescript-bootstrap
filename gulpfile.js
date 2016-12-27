@@ -10,6 +10,10 @@ gulp.task('generate-p5-ts', () => {
       'outputDirName': paths.generatedP5TDSTemp
   });
 });
+gulp.task('move-p5-ts', ['generate-p5-ts'], () => {
+  return gulp.src(paths.generatedP5TDSTemp + '/p5.d.ts')
+    .pipe(gulp.dest('src'));
+});
 
 gulp.task('default', () => {
 
