@@ -8,6 +8,7 @@ const buffer = require('vinyl-buffer');
 const fileExists = require('file-exists');
 const p5dtsgenerator = require('./scripts/generate-p5-typescript-definition');
 const runSequence = require('gulp-run-sequence');
+const filesExist = require('files-exist');
 
 const GENERATED_INSTANCE_MODE_P5_D_TS_FILENAME = 'p5.d.ts';
 const paths = {
@@ -59,9 +60,9 @@ gulp.task('copy-html', () => {
 });
 
 gulp.task('move-assets', () => {
-  // TODO(automatwon): explicitly enforce dependency on library node_modules or 
-  // don't move based on assumed file path
-  return gulp.src(paths.libraries)
+  return gulp.src(filesExist(paths.libraries, {
+      exceptionMessage: 'Please run `npm install to install missing library'
+     }))
     .pipe(gulp.dest('dist/js/lib'));
 });
 
