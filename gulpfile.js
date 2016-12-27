@@ -26,6 +26,10 @@ gulp.task('clean-generate-p5-ts', ['move-p5-ts'], () => {
   return del(paths.generatedP5TDSTemp);
 });
 
+gulp.task('clean-dist', () => {
+    return del('dist/**/*');
+});
+
 gulp.task('copy-html', () => {
     return gulp.src(paths.pages)
         .pipe(gulp.dest('dist'));
