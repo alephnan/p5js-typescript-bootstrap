@@ -6,6 +6,7 @@ const tsify = require('tsify');
 const sourcemaps = require('gulp-sourcemaps');
 const buffer = require('vinyl-buffer');
 const p5dtsgenerator = require('./scripts/generate-p5-typescript-definition');
+const runSequence = require('gulp-run-sequence');
 const paths = {
     pages: ['src/*.html'],
     libraries: ['node_modules/p5/lib/p5.js'],
@@ -26,6 +27,9 @@ gulp.task('move-p5-ts', ['generate-p5-ts'], () => {
 });
 gulp.task('clean-generate-p5-ts', () => {
   return del(paths.generatedP5TDSTemp);
+});
+gulp.task('initialize-p5-ts', () => {
+    runSequence('move-p5-ts', 'clean-generate-p5-ts');
 });
 gulp.task('clean-p5-ts', () => {
   return del(paths.srcDir + '/' + GENERATED_INSTANCE_MODE_P5_D_TS_FILENAME);

@@ -10,6 +10,7 @@
     "browserify": "^13.1.1",
     "del": "^2.2.2",
     "gulp": "^3.9.1",
+    "gulp-run-sequence": "^0.3.2",
     "gulp-sourcemaps": "^1.9.1",
     "tsify": "^2.0.7",
     "typescript": "^2.1.4",
