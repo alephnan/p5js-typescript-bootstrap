@@ -8,13 +8,20 @@ const buffer = require('vinyl-buffer');
 const fileExists = require('file-exists');
 const p5dtsgenerator = require('./scripts/generate-p5-typescript-definition');
 const runSequence = require('gulp-run-sequence');
+
+const GENERATED_INSTANCE_MODE_P5_D_TS_FILENAME = 'p5.d.ts';
 const paths = {
     pages: ['src/*.html'],
     libraries: ['node_modules/p5/lib/p5.js'],
-    generatedP5TDSTemp : 'scripts/generated',
-    srcDir: 'src'
-};
-const GENERATED_INSTANCE_MODE_P5_D_TS_FILENAME = 'p5.d.ts';
+    generatedP5TSDTemp : 'scripts/generated',
+    srcDir: 'src',
+    generatedP5TSDPath: null,
+    init: function() {
+        this.generatedP5TSDPath =this.generatedP5TSDTemp + '/' + GENERATED_INSTANCE_MODE_P5_D_TS_FILENAME;
+
+        return this;
+    }
+}.init();
 
 // Convert p5dtsgenerator to return streams
 gulp.task('generate-p5-ts', () => {
@@ -23,7 +30,7 @@ gulp.task('generate-p5-ts', () => {
   });
 });
 gulp.task('move-p5-ts', ['generate-p5-ts'], () => {
-  return gulp.src(paths.generatedP5TDSTemp + '/' + GENERATED_INSTANCE_MODE_P5_D_TS_FILENAME)
+  return gulp.src(paths.generatedP5TSDPath)
     .pipe(gulp.dest(paths.srcDir));
 });
 gulp.task('clean-generate-p5-ts', () => {
@@ -33,7 +40,7 @@ gulp.task('initialize-p5-ts', () => {
     runSequence('move-p5-ts', 'clean-generate-p5-ts');
 });
 gulp.task('clean-p5-ts', () => {
-  return del(paths.srcDir + '/' + GENERATED_INSTANCE_MODE_P5_D_TS_FILENAME);
+  return del(paths.generatedP5TSDPath);
 });
 
 gulp.task('clean-dist', () => {
@@ -75,7 +82,7 @@ gulp.task('build', () => {
 
 gulp.task('default', () => {
     const seq = [['copy-html', 'move-assets'], 'build'];
-    if(!fileExists(paths.srcDir + '/' + GENERATED_INSTANCE_MODE_P5_D_TS_FILENAME)) {
+    if(!fileExists(paths.generatedP5TSDPath)) {
         seq.unshift('initialize-p5-ts');
     }
     runSequence.apply(null, seq);
