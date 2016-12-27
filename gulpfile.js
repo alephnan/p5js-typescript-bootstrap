@@ -15,10 +15,11 @@ const paths = {
     libraries: ['node_modules/p5/lib/p5.js'],
     generatedP5TSDTemp : 'scripts/generated',
     srcDir: 'src',
+    generatedP5TSDTempPath: null,
     generatedP5TSDPath: null,
     init: function() {
-        this.generatedP5TSDPath =this.generatedP5TSDTemp + '/' + GENERATED_INSTANCE_MODE_P5_D_TS_FILENAME;
-
+        this.generatedP5TSDTempPath = this.generatedP5TSDTemp + '/' + GENERATED_INSTANCE_MODE_P5_D_TS_FILENAME;
+        this.generatedP5TSDPath = this.srcDir + '/' + GENERATED_INSTANCE_MODE_P5_D_TS_FILENAME;
         return this;
     }
 }.init();
@@ -26,15 +27,15 @@ const paths = {
 // Convert p5dtsgenerator to return streams
 gulp.task('generate-p5-ts', () => {
   return p5dtsgenerator.generate({
-      'outputDirName': paths.generatedP5TDSTemp
+      'outputDirName': paths.generatedP5TSDTemp
   });
 });
 gulp.task('move-p5-ts', ['generate-p5-ts'], () => {
-  return gulp.src(paths.generatedP5TSDPath)
+  return gulp.src(paths.generatedP5TSDTempPath)
     .pipe(gulp.dest(paths.srcDir));
 });
 gulp.task('clean-generate-p5-ts', () => {
-  return del(paths.generatedP5TDSTemp);
+  return del(paths.generatedP5TSDTemp);
 });
 gulp.task('initialize-p5-ts', () => {
     runSequence('move-p5-ts', 'clean-generate-p5-ts');
