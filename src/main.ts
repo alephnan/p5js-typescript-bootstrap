@@ -1,7 +1,11 @@
 ///<reference path="p5.d.ts" />
 
+import { helperFunction } from './helper';
+
 var sketch = function (p : p5) {
   p.setup = function () {
+    console.log(helperFunction("Foo"));
+    
     p.createCanvas(600, 400);
   };
 };
