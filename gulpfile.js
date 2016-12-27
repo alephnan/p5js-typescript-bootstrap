@@ -10,7 +10,9 @@ const paths = {
     pages: ['src/*.html'],
     libraries: ['node_modules/p5/lib/p5.js'],
     generatedP5TDSTemp : 'scripts/generated',
+    srcDir: 'src'
 };
+const GENERATED_INSTANCE_MODE_P5_D_TS_FILENAME = 'p5.d.ts';
 
 // Convert p5dtsgenerator to return streams
 gulp.task('generate-p5-ts', () => {
@@ -19,14 +21,14 @@ gulp.task('generate-p5-ts', () => {
   });
 });
 gulp.task('move-p5-ts', ['generate-p5-ts'], () => {
-  return gulp.src(paths.generatedP5TDSTemp + '/p5.d.ts')
-    .pipe(gulp.dest('src'));
+  return gulp.src(paths.generatedP5TDSTemp + '/' + GENERATED_INSTANCE_MODE_P5_D_TS_FILENAME)
+    .pipe(gulp.dest(paths.srcDir));
 });
 gulp.task('clean-generate-p5-ts', ['move-p5-ts'], () => {
   return del(paths.generatedP5TDSTemp);
 });
 gulp.task('clean-p5-ts', () => {
-  return del('src/p5.d.ts');
+  return del(paths.srcDir + '/' + GENERATED_INSTANCE_MODE_P5_D_TS_FILENAME);
 });
 
 gulp.task('clean-dist', () => {
