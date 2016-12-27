@@ -33,7 +33,7 @@ gulp.task('move-assets', () => {
 });
 
 gulp.task('default', () => {
-    // TODO(freefood): explicit enforce move-p5-ts ran
+    // TODO(automatwon): explicit enforce move-p5-ts ran
     return browserify({
             basedir: '.',
             debug: true,
