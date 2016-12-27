@@ -5,5 +5,4 @@ definitions for p5.js, with support for p5 instance-mode, and relevant starter f
 
 ## Instructions
 1. $ `npm install`
-2. $ `gulp initialize-p5-ts`
-3. $ `gulp`
+2. $ `gulp`
