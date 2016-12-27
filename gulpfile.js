@@ -7,6 +7,7 @@ const sourcemaps = require('gulp-sourcemaps');
 const buffer = require('vinyl-buffer');
 const p5dtsgenerator = require('./scripts/generate-p5-typescript-definition');
 const paths = {
+    pages: ['src/*.html'],
     libraries: ['node_modules/p5/lib/p5.js'],
     generatedP5TDSTemp : 'scripts/generated',
 };
@@ -23,6 +24,11 @@ gulp.task('move-p5-ts', ['generate-p5-ts'], () => {
 });
 gulp.task('clean-generate-p5-ts', ['move-p5-ts'], () => {
   return del(paths.generatedP5TDSTemp);
+});
+
+gulp.task('copy-html', () => {
+    return gulp.src(paths.pages)
+        .pipe(gulp.dest('dist'));
 });
 
 gulp.task('move-assets', () => {
