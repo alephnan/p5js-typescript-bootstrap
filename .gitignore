@@ -3,3 +3,4 @@ node_modules
 .vscode
 src/p5.d.ts
 dist
+scripts/generated
