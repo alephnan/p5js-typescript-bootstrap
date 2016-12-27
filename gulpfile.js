@@ -38,7 +38,7 @@ gulp.task('move-assets', () => {
         .pipe(gulp.dest('dist/js/lib'));
 });
 
-gulp.task('default', () => {
+gulp.task('default', ['copy-html', 'move-assets'], () => {
     // TODO(automatwon): explicit enforce move-p5-ts ran
     return browserify({
             basedir: '.',
