@@ -1,0 +1,11 @@
+{
+  "name": "generate-p5-typescript-definition",
+  "version": "1.0.0",
+  "description": "Auto-generate TypeScript Definition for P5 ",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}
