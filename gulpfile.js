@@ -75,7 +75,7 @@ gulp.task('build', () => {
 
 gulp.task('default', () => {
     const seq = [['copy-html', 'move-assets'], 'build'];
-    if(!fileExists('src/p5.d.ts')) {
+    if(!fileExists(paths.srcDir + '/' + GENERATED_INSTANCE_MODE_P5_D_TS_FILENAME)) {
         seq.unshift('initialize-p5-ts');
     }
     runSequence.apply(null, seq);
