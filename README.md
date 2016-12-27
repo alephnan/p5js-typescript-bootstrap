@@ -4,6 +4,6 @@ Includes gulp build to compile TS based sketch definitions, build step that auto
 definitions for p5.js, with support for p5 instance-mode, and relevant starter files.
 
 ## Instructions
-1. npm install
-2. gulp initialize-p5-ts
-3. gulp
+1. $ `npm install`
+2. $ `gulp initialize-p5-ts`
+3. $ `gulp`
