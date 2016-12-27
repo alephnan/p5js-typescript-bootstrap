@@ -5,6 +5,7 @@ const source = require('vinyl-source-stream');
 const tsify = require('tsify');
 const sourcemaps = require('gulp-sourcemaps');
 const buffer = require('vinyl-buffer');
+const fileExists = require('file-exists');
 const p5dtsgenerator = require('./scripts/generate-p5-typescript-definition');
 const runSequence = require('gulp-run-sequence');
 const paths = {
@@ -55,8 +56,7 @@ gulp.task('move-assets', () => {
         .pipe(gulp.dest('dist/js/lib'));
 });
 
-gulp.task('default', ['copy-html', 'move-assets'], () => {
-    // TODO(automatwon): explicit enforce move-p5-ts ran
+gulp.task('build', () => {
     return browserify({
             basedir: '.',
             debug: true,
@@ -73,4 +73,13 @@ gulp.task('default', ['copy-html', 'move-assets'], () => {
         .pipe(gulp.dest('dist/js/src'));
 });
 
+gulp.task('default', () => {
+    const seq = [['copy-html', 'move-assets'], 'build'];
+    if(!fileExists('src/p5.d.ts')) {
+        seq.unshift('initialize-p5-ts');
+    }
+    runSequence.apply(null, seq);
+});
+
 // TODO(automatwon): Add init task that generates p5 TS definitions and then build, clean, etc.
+
