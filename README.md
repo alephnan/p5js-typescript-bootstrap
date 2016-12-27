@@ -10,7 +10,8 @@ This is convenient for auto-completion of p5.js
 2. $ `gulp`
 
 ## TODOs
-- Ensure all lines less than 100 characters. Lint?
+- Ensure all lines less than 100 characters. Add lint-checker?
+- Reorder dependencies in package.json and gulpfile
 - Add non-trivial bootstrap files for bootstrap
 - To eliminate dependency on explicit library file path via npm. Build p5.js from source as bower package, then move lib/p5.js as gulp task?. Overkill?
 - Add (minimal) tests
