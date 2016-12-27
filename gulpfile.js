@@ -9,6 +9,7 @@ const fileExists = require('file-exists');
 const p5dtsgenerator = require('./scripts/generate-p5-typescript-definition');
 const runSequence = require('gulp-run-sequence');
 const filesExist = require('files-exist');
+const mainBowerFiles = require('main-bower-files');
 
 const GENERATED_INSTANCE_MODE_P5_D_TS_FILENAME = 'p5.d.ts';
 const paths = {
@@ -60,7 +61,12 @@ gulp.task('copy-html', () => {
     .pipe(gulp.dest('dist'));
 });
 
-gulp.task('move-assets', () => {
+gulp.task('move-bower-assets', () => {
+	return gulp.src(mainBowerFiles())
+		.pipe(gulp.dest('dist/js/lib'));
+});
+
+gulp.task('move-assets', ['move-bower-assets'], () => {
   return gulp.src(filesExist(paths.libraries, {
       exceptionMessage: 'Please run `npm install to install missing library'
      }))

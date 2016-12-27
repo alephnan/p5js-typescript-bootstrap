@@ -4,3 +4,4 @@ node_modules
 src/p5.d.ts
 dist
 scripts/generated
+bower_components
