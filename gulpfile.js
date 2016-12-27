@@ -31,16 +31,17 @@ gulp.task('generate-p5-ts', () => {
       'outputDirName': paths.generatedP5TSDTemp
   });
 });
-gulp.task('move-p5-ts', ['generate-p5-ts'], () => {
-  // TODO(automatwon): change to soft dependency on generate-p5-ts   
-  return gulp.src(paths.generatedP5TSDTempPath)
+gulp.task('move-p5-ts', () => {
+  return gulp.src(filesExist(paths.generatedP5TSDTempPath, {
+      exceptionMessage: 'No generated files to move. Please run `gulp generate-p5-ts`.'
+     }))
     .pipe(gulp.dest(paths.srcDir));
 });
 gulp.task('clean-generate-p5-ts', () => {
   return del(paths.generatedP5TSDTemp);
 });
 gulp.task('initialize-p5-ts', () => {
-  runSequence('move-p5-ts', 'clean-generate-p5-ts');
+  runSequence('generate-p5-ts', 'move-p5-ts', 'clean-generate-p5-ts');
 });
 gulp.task('clean-p5-ts', () => {
   return del(paths.generatedP5TSDPath);
