@@ -24,7 +24,7 @@ gulp.task('move-p5-ts', ['generate-p5-ts'], () => {
   return gulp.src(paths.generatedP5TDSTemp + '/' + GENERATED_INSTANCE_MODE_P5_D_TS_FILENAME)
     .pipe(gulp.dest(paths.srcDir));
 });
-gulp.task('clean-generate-p5-ts', ['move-p5-ts'], () => {
+gulp.task('clean-generate-p5-ts', () => {
   return del(paths.generatedP5TDSTemp);
 });
 gulp.task('clean-p5-ts', () => {
